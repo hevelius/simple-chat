@@ -3,15 +3,22 @@ var should = require('should');
 
 describe("TCP Chat Server",function(){
     describe("test server connection", function() {
-        it('Should server send Welcome message', function (done) {
-            var client = net.connect({ port: process.env.PORT },
+        var client;
+
+        after(function(done) {
+            client.end()
+            client.destroy()
+            done()
+        });
+
+        it('Should server send Welcome message', function () {
+            client = net.connect({ port: process.env.PORT },
                 function() {
                 }
             );
             client.on('data', function(data) {
                 data.toString().should.equal("Welcome "+client.localAddress + ":" + client.localPort + "\n");
                 client.end();
-                done();
             });
     
         });
@@ -38,13 +45,15 @@ describe("TCP Chat Server",function(){
 
         });
 
-        after(function() {
+        after(function(done) {
             clients.forEach(client => {
+                client.end();
                 client.destroy();
             });
+            done()
         });
 
-        it('Should server broadcast message to all clients', function (done) {
+        it('Should server broadcast message to all clients', function () {
             var client1 = clients[0];
             var client2 = clients[1];
 
@@ -53,7 +62,6 @@ describe("TCP Chat Server",function(){
                     // skip welcome message
                 } else {
                     data.toString().should.equal(client2.localAddress + "> " + message);
-                    done();
                 }
             });
 
