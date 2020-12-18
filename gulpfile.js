@@ -20,7 +20,7 @@ gulp.task('nodemon', (cb) => {
 
 });
 
-gulp.task('test', gulp.series('nodemon', function() {
+gulp.task('test', gulp.series('nodemon', async function() {
   return gulp.src('./tests/*.js')
     .pipe(mocha({reporter: 'spec' }))
     .once('error', function() {
