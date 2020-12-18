@@ -5,6 +5,9 @@ pipeline {
             args '-p 10000:10000' 
         }
     }
+    environment {
+        CI = 'true'
+    }
     stages {
         stage('Build') { 
             steps {
@@ -12,4 +15,9 @@ pipeline {
             }
         }
     }
+    stage('Test') {
+            steps {
+                sh 'npm run test'
+            }
+        }
 }
