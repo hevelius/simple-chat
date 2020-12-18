@@ -1,0 +1,11 @@
+{
+  "name": "simple-chat",
+  "version": "0.0.1",
+  "description": "a very simple tcp chat server",
+  "scripts": {
+    "start": "PORT=10000 node server.js"
+  },
+  "devDependencies": {
+
+  }
+}
