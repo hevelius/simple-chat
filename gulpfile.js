@@ -22,8 +22,8 @@ gulp.task('nodemon', (cb) => {
 
 gulp.task('test', gulp.series('nodemon', function() {
   return gulp.src('./tests/*.js')
-    .pipe(mocha({reporter: 'spec' }))  
-    once('error', function() {
+    .pipe(mocha({reporter: 'spec' }))
+    .once('error', function() {
         process.exit(1);
     })
     .once('end', function() {
