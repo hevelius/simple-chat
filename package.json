@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "a very simple tcp chat server",
   "scripts": {
-    "start": "PORT=10000 node server.js"
+    "start": "PORT=10000 node server.js",
+    "test": "PORT=10000 gulp test"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
