@@ -34,14 +34,21 @@ describe("TCP Chat Server",function(){
 
                 }
             );
-
             clients[0] = client1;
+
             var client2 = net.connect({ port: process.env.PORT },
                 function() {
                 
                 }
             );
             clients[1] = client2;
+
+            var client3 = net.connect({ port: process.env.PORT },
+                function() {
+                
+                }
+            );
+            clients[2] = client3;
 
         });
 
@@ -56,9 +63,18 @@ describe("TCP Chat Server",function(){
         it('Should server broadcast message to all clients', function () {
             var client1 = clients[0];
             var client2 = clients[1];
+            var client3 = clients[2];
 
             client1.on('data', function(data) {
                 if (data.toString() == "Welcome "+client1.localAddress + ":" + client1.localPort + "\n") {
+                    // skip welcome message
+                } else {
+                    data.toString().should.equal(client2.localAddress + "> " + message);
+                }
+            });
+
+            client3.on('data', function(data) {
+                if (data.toString() == "Welcome "+client3.localAddress + ":" + client3.localPort + "\n") {
                     // skip welcome message
                 } else {
                     data.toString().should.equal(client2.localAddress + "> " + message);
