@@ -18,3 +18,15 @@ const broadcast = (msg, sender) => {
     });
 };
 ```
+
+### If you want to start a server using docker 
+
+```bash
+$ git clone https://github.com/hevelius/simple-chat.git && cd simple-chat
+$ docker run --rm -p 10000:10000 -v $PWD:/usr/src/app -w /usr/src/app node npm start
+```
+
+### and try to connect with telnet
+```bash
+$ telnet 127.0.0.1 10000
+```
